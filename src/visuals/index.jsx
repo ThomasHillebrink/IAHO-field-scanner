@@ -1,5 +1,7 @@
 import CqGauge from './CqGauge.jsx'
 import FetrWaveform from './FetrWaveform.jsx'
+import ArchitectureMap from './ArchitectureMap.jsx'
+import CradleLattice from './CradleLattice.jsx'
 import GenericVisual from './GenericVisual.jsx'
 
 // Maps a mode's `visual` name to a component. The four not-yet-built visuals
@@ -14,6 +16,10 @@ export default function Visual({ mode, result, phase = 'result' }) {
       return <CqGauge result={result} accent={accent} phase={phase} />
     case 'FetrWaveform':
       return <FetrWaveform result={result} accent={accent} phase={phase} />
+    case 'ArchitectureMap':
+      return <ArchitectureMap result={result} accent={accent} phase={phase} />
+    case 'CradleLattice':
+      return <CradleLattice result={result} accent={accent} phase={phase} />
     default:
       return <GenericVisual accent={accent} label={mode?.short ?? ''} result={result} phase={phase} />
   }
