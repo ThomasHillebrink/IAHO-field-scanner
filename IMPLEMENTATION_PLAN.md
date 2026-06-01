@@ -186,12 +186,12 @@ networking, admin tooling.
 4. ✅ **CQ Boundary** signature visual (`CqGauge`) — the iconic `.34` gauge.
 5. ✅ **FETR Patch Integrity** signature visual (`FetrWaveform`).
 6. ✅ Auditor Override (5-tap logo).
-7. 🟡 Mode visuals beyond CQ/FETR:
+7. ✅ Mode visuals beyond CQ/FETR:
    - ✅ `ArchitectureMap` — Bastion-centred node map, radar sweep, flagged endpoint.
    - ✅ `CradleLattice` — distorted concentric fingerprint that resolves or fails.
+   - ✅ `ProcedureChecklist` — checklist ticks/crosses, scrambling evidence hash, seal stamp.
    - 🟡 Memory Retention uses the animated bars (`GenericVisual`) — looks good; a
-     bespoke `MemoryTimeline` (connected/broken nodes) is optional polish.
-   - ⬜ `ProcedureChecklist` — still on the placeholder bars.
+     bespoke `MemoryTimeline` (connected/broken nodes) remains optional polish.
 8. ⬜ Polish pass + flesh out scripted result beats; deploy to GitHub Pages.
 
 ### Done so far (MVP is runnable)
