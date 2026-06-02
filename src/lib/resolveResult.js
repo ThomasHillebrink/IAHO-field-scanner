@@ -1,4 +1,4 @@
-import { SCRIPTED, BORING_DEFAULT, POOLS } from '../config/results.js'
+import { SCRIPTED, BORING_DEFAULT, DECLARED_VI_DEFAULT, POOLS } from '../config/results.js'
 import { TARGETS_BY_ID } from '../config/targets.js'
 
 // Stable string hash (FNV-1a). Same input → same number, always.
@@ -27,6 +27,7 @@ export function resolveResult(modeId, targetId, overrideKey) {
   if (SCRIPTED[key]) return SCRIPTED[key]
 
   const target = TARGETS_BY_ID[targetId]
+  if (target?.vi) return DECLARED_VI_DEFAULT
   if (target?.manual) return BORING_DEFAULT
 
   const pool = POOLS[modeId]

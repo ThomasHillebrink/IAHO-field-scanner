@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { SCAN_MODES_BY_ID } from './config/scanModes.js'
-import { TARGETS_BY_ID } from './config/targets.js'
+import { TARGETS_BY_ID, targetLabel, REGISTRY_UNLOCK } from './config/targets.js'
 import { resolveResult } from './lib/resolveResult.js'
 import { saveEntry } from './lib/audit.js'
+import { loadRegistryUnlocked, setRegistryUnlocked } from './lib/registry.js'
 import HomeScreen from './screens/HomeScreen.jsx'
 import TargetScreen from './screens/TargetScreen.jsx'
 import ScanScreen from './screens/ScanScreen.jsx'
@@ -24,9 +25,13 @@ export default function App() {
   const [overridePanelOpen, setOverridePanelOpen] = useState(false)
   const [armedOverride, setArmedOverride] = useState(null)
 
+  // Registry of persona assets — revealed once the Bastion topology sweep runs.
+  const [registryUnlocked, setRegistryUnlockedState] = useState(loadRegistryUnlocked)
+  const [justUnlocked, setJustUnlocked] = useState(false)
+
   const mode = modeId ? SCAN_MODES_BY_ID[modeId] : null
   const target = targetId ? TARGETS_BY_ID[targetId] : null
-  const targetName = target?.manual ? manualName || 'Manual Target' : target?.name
+  const targetName = target?.manual ? manualName || target.name : targetLabel(target)
 
   function pickMode(id) {
     setModeId(id)
@@ -48,7 +53,19 @@ export default function App() {
 
   // Called when the scan animation completes — the result is already resolved.
   function completeScan() {
+    // The Bastion topology sweep retrieves the registry and reveals the assets.
+    if (modeId === REGISTRY_UNLOCK.mode && targetId === REGISTRY_UNLOCK.target && !registryUnlocked) {
+      setRegistryUnlocked(true)
+      setRegistryUnlockedState(true)
+      setJustUnlocked(true)
+    }
     setScreen(SCREENS.RESULT)
+  }
+
+  function toggleRegistry(unlocked) {
+    setRegistryUnlocked(unlocked)
+    setRegistryUnlockedState(unlocked)
+    if (!unlocked) setJustUnlocked(false)
   }
 
   function saveResult() {
@@ -86,7 +103,14 @@ export default function App() {
       )}
 
       {screen === SCREENS.TARGET && (
-        <TargetScreen mode={mode} onBack={reset} onPickTarget={pickTarget} />
+        <TargetScreen
+          mode={mode}
+          onBack={reset}
+          onPickTarget={pickTarget}
+          registryUnlocked={registryUnlocked}
+          justUnlocked={justUnlocked}
+          onSeenUnlock={() => setJustUnlocked(false)}
+        />
       )}
 
       {screen === SCREENS.SCAN && (
@@ -114,6 +138,8 @@ export default function App() {
 
       {overridePanelOpen && (
         <OverridePanel
+          registryUnlocked={registryUnlocked}
+          onToggleRegistry={toggleRegistry}
           onArm={(band) => {
             setArmedOverride(band)
             setOverridePanelOpen(false)

@@ -1,7 +1,8 @@
 import { OVERRIDE_BANDS } from '../config/overrides.js'
 
-// SL-only modal. Arms a forced result band for the next scan.
-export default function OverridePanel({ onArm, onClear, onClose }) {
+// SL-only modal. Arms a forced result band for the next scan, and can
+// lock/unlock the registry of persona assets between runs.
+export default function OverridePanel({ registryUnlocked, onToggleRegistry, onArm, onClear, onClose }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -25,6 +26,15 @@ export default function OverridePanel({ onArm, onClear, onClose }) {
             </button>
           ))}
         </div>
+        <div className="modal__registry">
+          <span className="modal__registry-label">
+            REGISTRY: {registryUnlocked ? 'UNLOCKED' : 'LOCKED'}
+          </span>
+          <button className="btn btn--ghost" onClick={() => onToggleRegistry(!registryUnlocked)}>
+            {registryUnlocked ? 'RE-LOCK REGISTRY' : 'FORCE UNLOCK'}
+          </button>
+        </div>
+
         <div className="modal__actions">
           <button className="btn btn--ghost" onClick={onClear}>
             CLEAR ARMED OVERRIDE

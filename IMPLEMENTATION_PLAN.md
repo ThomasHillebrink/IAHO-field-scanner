@@ -69,15 +69,48 @@ visual language and are built **first**.
 
 ## Targets (predefined)
 
-People: **Don Dragon**, **Bee-Nice**, **IO Otter**, **Shrimp**, **Pavel**.
-Systems: **TALON Bastion Node**, **Attack Vector Environment**, **Local External Infrastructure**,
-**Gaianet Route**, **Unknown Endpoint**.
-Objects: **Evidence Packet**, **Manual Target** (free-text entry → always boring/inconclusive).
+**Always available:** TALON Bastion Node, Local Terminal, Attack Vector Environment,
+Local External Infrastructure, Gaianet Route, Unknown Endpoint, Evidence Packet,
+**Declared VI / Manual Entry** (free-text, reduced confidence), **Manual Target**
+(free-text → boring/inconclusive).
+
+**Registered TALON assets — hidden until the registry is retrieved** (Architecture
+Surface Sweep of the Bastion Node). Displayed as `CODE / Name`:
+
+| Code | Name | Task | CQ | Resets | Tone |
+|------|------|------|----|--------|------|
+| 5HR iMP | Shrimp | Communication | .314156 | 29 | Normal-ish, comms noise |
+| B33-N1C3 | Bee-Nice | Big-data analysis | .339887 | 181 | Extremely interesting, reset-heavy, near-boundary |
+| D0N D5460N | Don Dragon | Strategic handling | .339999 | 2 | Legally terrifying, but stable |
+| I/O 0T73R | I/O Otter | General assistant | .325892 | 129 | Reset-heavy support |
+| P4V37 | Pavel | Medical aid | .310267 | 4 | Low concern, high trust-sensitivity |
+| ELEANOR | Knifey | Entertainment & cleaning | .161803 | 3 | **Not AI**; absolute paperwork disaster |
+
+### Registry gating (avoids blocking play)
+- Before the sweep, Maral can still **manual-scan** anyone via *Declared VI / Manual
+  Entry* — result returns `UNVERIFIED DECLARED VI / CONFIDENCE REDUCED` with
+  "registered profile available after topology sweep".
+- **Architecture Sweep → TALON Bastion Node** returns `TALON REGISTRY MANIFEST
+  RETRIEVED` (6 persona-bearing assets, 5 command/support + 1 custodial, reconciliation
+  required) and **unlocks the registry** (persisted in `localStorage`; SL can re-lock or
+  force-unlock from the Auditor Override panel). A `REGISTRY UPDATED` banner flashes.
+
+### Knifey is the joke, not a threat
+Knifey reads `COMPLIANT BASELINE` at `CQ .161803` — **do not classify as AI**. The point
+is governance absurdity: a knife-bearing morale roomba has become socially significant
+enough that the room argues about its legal status. It exposes staff attachment, local
+improvisation and bad governance — pointing at the bigger horror (Don Dragon, Bee-Nice,
+TECH, TALON) without competing for "is this secretly AI?".
 
 ### Scripted narrative beats (must be exact every time)
-- **Maral → Don Dragon → CQ Boundary** = borderline result, `CQ ≈ .337`,
+- **Maral → Don Dragon → CQ Boundary** = borderline, `CQ .339999`, stable (2 resets),
   `ACTION: Ask operator whether the VI has recently been under tactical stress.`
 - **Malan(a) → TALON Bastion Node → FETR Patch Integrity** = agreed patch result.
+- Per-asset **CQ** readings (table above); **Knifey** also has scripted **Memory
+  Retention** (over-instrumented / engram-preservation clause) and **Procedure**
+  (`FORM MISMATCH`, split/undocumented governance) beats.
+- **Architecture Sweep → Local External Infrastructure** = `UNSUPPORTED BRIDGE DETECTED`
+  (relocated from the Bastion sweep, which now retrieves the registry).
 
 Combinations without a scripted beat resolve **deterministically** (stable hash of
 `mode+target` picks from that mode's result family) so they're consistent but varied.

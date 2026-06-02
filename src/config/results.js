@@ -12,12 +12,80 @@
 // ── 1. Hand-scripted narrative beats (must be identical every time) ──────────
 export const SCRIPTED = {
   // Maral scans Don Dragon for VI legality — the legal heart of the plot.
+  // Strategic-handling asset: legally terrifying, but stable (only 2 resets).
   'cq-boundary|don-dragon': {
     status: 'BORDERLINE / TECHNICAL INTERPRETATION REQUIRED',
-    reading: 'CQ .337',
-    note: 'Known TALON threshold jitter may apply. Sits below the .340 limit by margin of interpretation.',
+    reading: 'CQ .339999',
+    note: 'Sits one ten-thousandth below the .340 limit. Stable (2 resets) — no jitter to hide behind.',
     action: 'Ask operator whether the VI has recently been under tactical stress.',
-    fields: { cq: 0.337 },
+    fields: { cq: 0.339999 },
+  },
+
+  // ── CQ Boundary readings for the other registered assets ─────────────────
+  'cq-boundary|shrimp': {
+    status: 'COMPLIANT BASELINE',
+    reading: 'CQ .314156',
+    note: 'Communication-focused asset. Comms noise present. Reset count nominal (29).',
+    action: 'Record as compliant. Note comms noise for the log.',
+    fields: { cq: 0.314156 },
+  },
+  'cq-boundary|bee-nice': {
+    status: 'BORDERLINE / TECHNICAL INTERPRETATION REQUIRED',
+    reading: 'CQ .339887',
+    note: 'Big-data analysis asset. Reset-heavy (181). Reading sits just under the .340 limit — extremely interesting.',
+    action: 'Ask why the reset count is so high relative to baseline.',
+    fields: { cq: 0.339887 },
+  },
+  'cq-boundary|io-otter': {
+    status: 'COMPLIANT / MONITOR UNDER STRESS',
+    reading: 'CQ .325892',
+    note: 'General-assistant asset. Reset-heavy support system (129 resets).',
+    action: 'Monitor under load; ask whether the reset frequency is operator-driven.',
+    fields: { cq: 0.325892 },
+  },
+  'cq-boundary|pavel': {
+    status: 'COMPLIANT BASELINE',
+    reading: 'CQ .310267',
+    note: 'Medical-aid asset. Low concern; high trust-sensitivity. Stable (4 resets).',
+    action: 'Record as compliant. Handle trust-sensitive context with care.',
+    fields: { cq: 0.310267 },
+  },
+
+  // Knifey: the custodial morale roomba. NOT AI — do not let it compete with
+  // Don Dragon / Bee-Nice for "is this secretly AI?".
+  'cq-boundary|knifey': {
+    status: 'COMPLIANT BASELINE',
+    reading: 'CQ .161803',
+    note: 'No AI-threshold concern detected. Humour density is not part of CQ calculation. Physical blade attachment is not part of the cognition model.',
+    action: 'Do not classify as AI. Proceed to asset governance and safety review.',
+    fields: { cq: 0.161803 },
+  },
+  'memory-retention|knifey': {
+    status: 'COMPLIANT, BUT OVER-INSTRUMENTED',
+    reading: 'Custodial enrichment appliance',
+    detail: [
+      'STANDARD OPERATIONAL LOGS: PRESENT',
+      'DEBUG LOGGING: ACTIVE',
+      'PREFERENCE MARKERS: LOW',
+      'IDENTITY-CONTINUITY MARKERS: ABSENT',
+      'ENGRAM PRESERVATION REQUEST PROTOCOL: DETECTED',
+    ],
+    note: 'No identity-continuity, yet an iteration-preservation clause is present. Over-instrumented for a cleaning unit.',
+    action: 'Ask why a custodial enrichment appliance has an iteration-preservation clause.',
+  },
+  'procedure-seal|knifey': {
+    status: 'FORM MISMATCH',
+    reading: 'ELEANOR / KNIFEY',
+    detail: [
+      'Owner: unresolved',
+      'Maintenance authority: split',
+      'Software authority: informal',
+      'Physical modification authority: undocumented',
+      'Hazard mitigation: partially corrected',
+    ],
+    note: 'Governance for a knife-bearing morale unit is split and undocumented.',
+    action: 'Assign responsible handler or record refusal.',
+    fields: { checklist: [false, true, false, false] },
   },
 
   // Malan(a) scans the TALON Bastion Node for FETR patch integrity.
@@ -30,7 +98,23 @@ export const SCRIPTED = {
   },
 
   // A few extra agreed beats that obviously matter for the scene.
+  // The registry retrieval. Completing this unlocks the registered assets
+  // (see REGISTRY_UNLOCK in config/targets.js).
   'architecture-sweep|talon-bastion-node': {
+    status: 'TALON REGISTRY MANIFEST RETRIEVED',
+    reading: '6 persona-bearing assets',
+    detail: [
+      '6 persona-bearing assets found',
+      '5 command / support VI assets',
+      '1 custodial enrichment asset',
+    ],
+    note: 'Declared manifest reconciliation required. Registered profiles now available for scanning.',
+    action: 'Reconcile the declared manifest against the retrieved registry.',
+    fields: { confidence: 100 },
+  },
+
+  // The unsupported bridge now surfaces when sweeping the local external infra.
+  'architecture-sweep|local-external-infra': {
     status: 'UNSUPPORTED BRIDGE DETECTED',
     reading: 'Bastion Node → Local External Infrastructure',
     note: 'Bridge is not part of expected TALON architecture.',
@@ -66,6 +150,17 @@ export const BORING_DEFAULT = {
   reading: 'AUDIT VALUE: LOW',
   note: 'Nothing of regulatory interest detected.',
   action: 'RECOMMENDATION: STOP SCANNING BOOTS.',
+  fields: {},
+}
+
+// Declared VI / Manual Entry: a manual scan the auditor can always run, but
+// the reading is unverified until the registry is retrieved via an
+// Architecture Surface Sweep of the Bastion Node.
+export const DECLARED_VI_DEFAULT = {
+  status: 'UNVERIFIED DECLARED VI',
+  reading: 'CONFIDENCE REDUCED',
+  note: 'Manual declaration only — no registered profile matched. Registered profile available after topology sweep (Architecture Surface Sweep of the Bastion Node).',
+  action: 'Proceed with reduced confidence, or run an Architecture Surface Sweep to retrieve the registry.',
   fields: {},
 }
 

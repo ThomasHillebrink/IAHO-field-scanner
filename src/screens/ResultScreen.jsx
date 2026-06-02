@@ -27,6 +27,16 @@ export default function ResultScreen({ mode, targetName, result, onSave, onRepea
         <Row label="TARGET" value={targetName} />
         <Row label="STATUS" value={result.status} strong />
         {result.reading && <Row label="READING" value={result.reading} />}
+        {result.detail && (
+          <div className="result-row">
+            <span className="result-row__label">DETAIL</span>
+            <div className="result-detail">
+              {result.detail.map((line, i) => (
+                <div key={i} className="result-detail__line">{line}</div>
+              ))}
+            </div>
+          </div>
+        )}
         {saved && <Row label="EVIDENCE ID" value={`${saved.evidenceId}  ·  ${saved.modeTag}`} mono />}
         {result.note && <Row label="NOTE" value={result.note} />}
         <Row label="ACTION" value={result.action} action />

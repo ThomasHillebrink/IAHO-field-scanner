@@ -241,6 +241,80 @@ button { font-family: inherit; cursor: pointer; }
 }
 .manual-input:focus { outline: none; border-color: var(--accent); }
 
+.target-btn { display: flex; flex-direction: column; gap: 2px; }
+.target-btn__code { font-size: 11px; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; }
+.target-btn__name { font-size: 12px; color: var(--ink-dim); }
+
+.manual-block { margin-bottom: 12px; }
+.manual-block__label { display: block; font-size: 12px; color: var(--ink); margin-bottom: 6px; }
+.manual-block__hint { color: var(--ink-faint); font-style: normal; font-size: 11px; }
+
+/* Registry gating */
+.registry-note {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin: 0 0 8px;
+}
+.registry-locked {
+  font-size: 12px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: 3px;
+  padding: 12px 14px;
+}
+.registry-locked__lock {
+  display: block;
+  color: var(--ink-faint);
+  letter-spacing: 0.2em;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+.registry-locked strong { color: var(--ink); }
+
+.registry-flash {
+  position: relative;
+  background: color-mix(in srgb, var(--accent) 12%, var(--panel));
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  text-align: center;
+  animation: flashin 0.4s ease;
+}
+@keyframes flashin { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.registry-flash__main { font-weight: 800; letter-spacing: 0.22em; color: var(--accent); }
+.registry-flash__line { font-size: 12px; letter-spacing: 0.12em; color: var(--ink); margin-top: 4px; }
+.registry-flash__warn { font-size: 11px; letter-spacing: 0.12em; color: var(--danger); margin-top: 2px; }
+.registry-flash__x {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Result detail block (multi-line readouts: Knifey, registry manifest, …) */
+.result-detail { display: flex; flex-direction: column; gap: 3px; }
+.result-detail__line { font-size: 12px; color: var(--ink); letter-spacing: 0.04em; }
+
+/* Override panel registry control */
+.modal__registry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.modal__registry-label { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-dim); }
+
 /* ── Scan ────────────────────────────────────────────────────────────────── */
 .scan-target { text-align: center; margin: 8px 0 4px; }
 .scan-target__label {
