@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { TARGETS, targetLabel } from '../config/targets.js'
 
-const systems = TARGETS.filter((t) => t.kind === 'system')
-const objects = TARGETS.filter((t) => t.kind === 'object')
-const manuals = TARGETS.filter((t) => t.kind === 'manual')
-const assets = TARGETS.filter((t) => t.kind === 'asset')
+const ALL_KINDS = ['system', 'object', 'asset', 'vi-manual', 'manual']
+const byKind = (k) => TARGETS.filter((t) => t.kind === k)
 
 export default function TargetScreen({
   mode,
@@ -17,6 +15,15 @@ export default function TargetScreen({
   // One free-text value per manual target (Declared VI + Manual Target).
   const [names, setNames] = useState({})
   const accent = { '--accent': mode.accent }
+
+  // Only the target kinds this scanner can logically be pointed at.
+  const allowed = mode.targetKinds ?? ALL_KINDS
+  const systems = allowed.includes('system') ? byKind('system') : []
+  const objects = allowed.includes('object') ? byKind('object') : []
+  const showAssets = allowed.includes('asset')
+  const manualTargets = TARGETS.filter(
+    (t) => (t.kind === 'vi-manual' || t.kind === 'manual') && allowed.includes(t.kind),
+  )
 
   return (
     <div className="screen screen--target">
@@ -35,65 +42,73 @@ export default function TargetScreen({
       )}
 
       <div className="target-scroll">
-        <Group label="Systems & Routes">
-          <div className="target-grid">
-            {systems.map((t) => (
-              <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
-            ))}
-          </div>
-        </Group>
-
-        <Group label="Objects">
-          <div className="target-grid">
-            {objects.map((t) => (
-              <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
-            ))}
-          </div>
-        </Group>
-
-        <Group label="Manual Entry">
-          {manuals.map((t) => (
-            <div key={t.id} className="manual-block">
-              <span className="manual-block__label">
-                {t.name}
-                {t.vi && !registryUnlocked && <em className="manual-block__hint"> · reduced confidence</em>}
-              </span>
-              <div className="manual-row">
-                <input
-                  className="manual-input"
-                  type="text"
-                  placeholder={t.vi ? 'Declared VI name…' : 'Free-text target…'}
-                  value={names[t.id] ?? ''}
-                  onChange={(e) => setNames((n) => ({ ...n, [t.id]: e.target.value }))}
-                />
-                <button className="btn" style={accent} onClick={() => onPickTarget(t.id, names[t.id])}>
-                  SCAN
-                </button>
-              </div>
+        {systems.length > 0 && (
+          <Group label="Systems & Routes">
+            <div className="target-grid">
+              {systems.map((t) => (
+                <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
+              ))}
             </div>
-          ))}
-        </Group>
+          </Group>
+        )}
 
-        <Group label="Registered TALON Assets">
-          {registryUnlocked ? (
-            <>
-              <p className="registry-note">
-                REGISTRY RETRIEVED · 5 COMMAND/SUPPORT · 1 CUSTODIAL · RECONCILIATION REQUIRED
-              </p>
-              <div className="target-grid">
-                {assets.map((t) => (
-                  <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="registry-locked">
-              <span className="registry-locked__lock">⊘ LOCKED</span>
-              Registered profiles available after topology sweep. Run an{' '}
-              <strong>Architecture Surface Sweep</strong> of the <strong>TALON Bastion Node</strong>.
+        {objects.length > 0 && (
+          <Group label="Objects">
+            <div className="target-grid">
+              {objects.map((t) => (
+                <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
+              ))}
             </div>
-          )}
-        </Group>
+          </Group>
+        )}
+
+        {showAssets && (
+          <Group label="Registered TALON Assets">
+            {registryUnlocked ? (
+              <>
+                <p className="registry-note">
+                  REGISTRY RETRIEVED · 5 COMMAND/SUPPORT · 1 CUSTODIAL · RECONCILIATION REQUIRED
+                </p>
+                <div className="target-grid">
+                  {byKind('asset').map((t) => (
+                    <TargetBtn key={t.id} target={t} accent={accent} onClick={() => onPickTarget(t.id)} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="registry-locked">
+                <span className="registry-locked__lock">⊘ LOCKED</span>
+                Registered profiles available after topology sweep. Run an{' '}
+                <strong>Architecture Surface Sweep</strong> of the <strong>TALON Bastion Node</strong>.
+              </div>
+            )}
+          </Group>
+        )}
+
+        {manualTargets.length > 0 && (
+          <Group label="Manual Entry">
+            {manualTargets.map((t) => (
+              <div key={t.id} className="manual-block">
+                <span className="manual-block__label">
+                  {t.name}
+                  {t.vi && !registryUnlocked && <em className="manual-block__hint"> · reduced confidence</em>}
+                </span>
+                <div className="manual-row">
+                  <input
+                    className="manual-input"
+                    type="text"
+                    placeholder={t.vi ? 'Declared VI name…' : 'Free-text target…'}
+                    value={names[t.id] ?? ''}
+                    onChange={(e) => setNames((n) => ({ ...n, [t.id]: e.target.value }))}
+                  />
+                  <button className="btn" style={accent} onClick={() => onPickTarget(t.id, names[t.id])}>
+                    SCAN
+                  </button>
+                </div>
+              </div>
+            ))}
+          </Group>
+        )}
       </div>
     </div>
   )

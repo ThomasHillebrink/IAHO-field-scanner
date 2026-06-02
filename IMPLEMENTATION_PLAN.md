@@ -86,6 +86,16 @@ Surface Sweep of the Bastion Node). Displayed as `CODE / Name`:
 | P4V37 | Pavel | Medical aid | .310267 | 4 | Low concern, high trust-sensitivity |
 | ELEANOR | Knifey | Entertainment & cleaning | .161803 | 3 | **Not AI**; absolute paperwork disaster |
 
+### Per-mode target scoping (clutter reduction)
+Each mode in `config/scanModes.js` declares `targetKinds`; the target screen shows
+only logical options. Kinds: `system` · `object` · `asset` (registered VIs) ·
+`vi-manual` (Declared VI entry) · `manual` (generic catch-all, on every mode).
+- **CQ Boundary**, **Memory Retention** → `asset`, `vi-manual` (VIs only)
+- **FETR Patch** → `system`, `asset`
+- **Architecture Sweep** → `system` (no VIs)
+- **Cradle Residue** → `system`, `asset`, `vi-manual`
+- **Procedure / Seal** → `object`, `asset`
+
 ### Registry gating (avoids blocking play)
 - Before the sweep, Maral can still **manual-scan** anyone via *Declared VI / Manual
   Entry* — result returns `UNVERIFIED DECLARED VI / CONFIDENCE REDUCED` with

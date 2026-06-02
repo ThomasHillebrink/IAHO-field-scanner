@@ -26,7 +26,7 @@ export const TARGETS = [
   { id: 'evidence-packet', name: 'Evidence Packet', kind: 'object', group: 'always' },
 
   // ── Manual entry (always available) ───────────────────────────────────────
-  { id: 'declared-vi', name: 'Declared VI / Manual Entry', kind: 'manual', group: 'always', manual: true, vi: true },
+  { id: 'declared-vi', name: 'Declared VI / Manual Entry', kind: 'vi-manual', group: 'always', manual: true, vi: true },
   { id: 'manual', name: 'Manual Target', kind: 'manual', group: 'always', manual: true },
 
   // ── Registered TALON assets (revealed after the topology sweep) ───────────
