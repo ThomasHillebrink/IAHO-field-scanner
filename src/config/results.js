@@ -51,13 +51,14 @@ export const SCRIPTED = {
     fields: { cq: 0.310267 },
   },
 
-  // Knifey: the custodial morale roomba. NOT AI — do not let it compete with
-  // Don Dragon / Bee-Nice for "is this secretly AI?".
+  // Knifey: a custodial enrichment appliance people got attached to. NOT AI —
+  // do not let it compete with Don Dragon / Bee-Nice for "is this secretly AI?".
+  // Attachment/personability protocol uses a .200 CQ gate (below = fine).
   'cq-boundary|knifey': {
     status: 'COMPLIANT BASELINE',
     reading: 'CQ .161803',
-    note: 'No AI-threshold concern detected. Humour density is not part of CQ calculation. Physical blade attachment is not part of the cognition model.',
-    action: 'Do not classify as AI. Proceed to asset governance and safety review.',
+    note: 'Attachment / personability protocol applies: CQ below .200 is within tolerance; above .200 warrants further investigation. Reading .161803 is within tolerance. No AI-threshold (.340) concern. Humour density is not part of the CQ calculation.',
+    action: 'Do not classify as AI. No attachment-protocol action required. Proceed to asset governance.',
     fields: { cq: 0.161803 },
   },
   'memory-retention|knifey': {
@@ -83,7 +84,7 @@ export const SCRIPTED = {
       'Physical modification authority: undocumented',
       'Hazard mitigation: partially corrected',
     ],
-    note: 'Governance for a knife-bearing morale unit is split and undocumented.',
+    note: 'Governance for this custodial morale asset is split and undocumented.',
     action: 'Assign responsible handler or record refusal.',
     fields: { checklist: [false, true, false, false] },
   },
