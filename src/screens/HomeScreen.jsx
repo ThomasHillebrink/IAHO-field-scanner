@@ -16,14 +16,13 @@ export default function HomeScreen({ onPickMode, onOpenAudit, onSecretOverride, 
       </header>
 
       <div className="mode-grid">
-        {SCAN_MODES.map((m, i) => (
+        {SCAN_MODES.map((m) => (
           <button
             key={m.id}
             className="mode-card"
             style={{ '--accent': m.accent }}
             onClick={() => onPickMode(m.id)}
           >
-            <span className="mode-card__index">{String(i + 1).padStart(2, '0')}</span>
             <span className="mode-card__name">{m.name}</span>
             <span className="mode-card__short">{m.short}</span>
             <span className="mode-card__blurb">{m.blurb}</span>

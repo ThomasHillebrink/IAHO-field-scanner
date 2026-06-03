@@ -123,28 +123,41 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 26px;
   font-weight: 800;
   letter-spacing: 0.3em;
+  text-indent: 0.3em;
   color: var(--accent);
   text-shadow: 0 0 14px rgba(95, 208, 255, 0.4);
 }
 .iaho-logo__sub {
   font-size: 9px;
   letter-spacing: 0.32em;
+  text-indent: 0.32em;
   color: var(--ink-faint);
 }
 .iaho-logo--small .iaho-logo__mark { font-size: 16px; }
 
 /* ── Home ────────────────────────────────────────────────────────────────── */
-.home-head { text-align: center; margin: 10px 0 22px; }
+.home-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0 22px;
+}
+/* text-indent == letter-spacing offsets the trailing space letter-spacing adds
+   after the last glyph, so each line is optically centered (and aligned with
+   the logo above it). */
 .home-title {
   margin: 12px 0 4px;
   font-size: 20px;
   letter-spacing: 0.42em;
+  text-indent: 0.42em;
   font-weight: 700;
 }
 .home-sub {
   margin: 0;
   font-size: 11px;
   letter-spacing: 0.28em;
+  text-indent: 0.28em;
   color: var(--ink-dim);
 }
 .override-armed {
@@ -168,22 +181,14 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 3px;
   padding: 14px 14px 14px 16px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas: "idx name short" "idx blurb blurb";
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name short" "blurb blurb";
   gap: 2px 12px;
   color: var(--ink);
   transition: background 0.12s, transform 0.06s;
 }
 .mode-card:active { transform: scale(0.99); }
 .mode-card:hover { background: var(--panel-2); }
-.mode-card__index {
-  grid-area: idx;
-  align-self: center;
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--accent);
-  opacity: 0.7;
-}
 .mode-card__name { grid-area: name; font-weight: 700; letter-spacing: 0.04em; }
 .mode-card__short {
   grid-area: short;
