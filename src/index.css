@@ -367,6 +367,71 @@ button { font-family: inherit; cursor: pointer; }
 }
 .scan-btn:active { transform: scale(0.97); }
 
+/* Camera scan (Evidence Packet under the Procedure scanner) */
+.cam-wrap,
+.cam-standby {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
+  margin: 18px auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #02040a;
+}
+.cam-feed { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cam-overlay { position: absolute; inset: 0; pointer-events: none; }
+
+.cam-standby {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+}
+.cam-standby__text {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--ink-dim);
+  animation: procblink 1s steps(2) infinite;
+}
+
+/* corner reticle brackets */
+.cam-bracket {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid currentColor;
+  opacity: 0.85;
+}
+.cam-bracket--tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.cam-bracket--tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.cam-bracket--bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.cam-bracket--br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* static crossing crosshair */
+.cam-line { position: absolute; background: currentColor; opacity: 0.35; }
+.cam-line--h { left: 0; right: 0; top: 50%; height: 1px; }
+.cam-line--v { top: 0; bottom: 0; left: 50%; width: 1px; }
+
+/* sweeping scan lines that cross over the feed */
+.cam-sweep { position: absolute; background: currentColor; box-shadow: 0 0 8px currentColor; }
+.cam-sweep--h { left: 0; right: 0; height: 2px; top: 0; animation: camSweepH 1.8s ease-in-out infinite alternate; }
+.cam-sweep--v { top: 0; bottom: 0; width: 2px; left: 0; animation: camSweepV 2.3s ease-in-out infinite alternate; }
+@keyframes camSweepH { from { top: 4%; } to { top: 96%; } }
+@keyframes camSweepV { from { left: 4%; } to { left: 96%; } }
+
+.cam-error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--danger);
+}
+
 .scan-progress { margin-top: auto; }
 .scan-phase {
   text-align: center;

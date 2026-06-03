@@ -136,11 +136,13 @@ export const SCRIPTED = {
     action: 'Stop. Record evidence ID and notify the senior auditor before proceeding.',
     fields: { resolve: false },
   },
+  // Camera scan (see ScanScreen). List resolves to ✓✓✗✓ — the break is on
+  // Chain of Custody (item 3); revision, seal and signature verify.
   'procedure-seal|evidence-packet': {
-    status: 'SIGNATURE GAP',
-    reading: 'Seal incomplete',
-    note: 'Missing: local responsible officer acknowledgement.',
-    action: 'Obtain signature or record refusal.',
+    status: 'CHAIN-OF-CUSTODY BREAK',
+    reading: 'Custody gap',
+    note: 'Form revision, seal and officer signature verify; chain of custody is broken.',
+    action: 'Record where custody was lost and who held it last.',
     fields: { checklist: [true, true, false, true] },
   },
 }

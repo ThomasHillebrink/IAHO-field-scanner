@@ -105,6 +105,14 @@ only logical options. Kinds: `system` · `object` · `asset` (registered VIs) ·
   required) and **unlocks the registry** (persisted in `localStorage`; SL can re-lock or
   force-unlock from the Auditor Override panel). A `REGISTRY UPDATED` banner flashes.
 
+### Camera scan (Evidence Packet)
+Scanning **Evidence Packet** under the **Procedure / Seal** scanner activates the device
+camera (`getUserMedia`, rear-facing preferred) on START SCAN and overlays a reticle —
+corner brackets, a static crosshair and two sweeping scan lines — over the live feed for
+the scan duration. Requires HTTPS (GitHub Pages provides it); denied/unavailable cameras
+fall back to a normal timed scan. The result resolves immediately to the checklist
+`✓ FORM REVISION MATCH · ✓ EVIDENCE SEAL INTACT · ✗ CHAIN OF CUSTODY · ✓ OFFICER SIGNATURE`.
+
 ### Knifey is the joke, not a threat
 Knifey reads `COMPLIANT BASELINE` at `CQ .161803` — **do not classify as AI**. The point
 is governance absurdity: a knife-bearing morale roomba has become socially significant

@@ -118,6 +118,7 @@ export default function App() {
           mode={mode}
           targetName={targetName}
           result={result}
+          cameraScan={modeId === 'procedure-seal' && targetId === 'evidence-packet'}
           onComplete={completeScan}
           onBack={() => setScreen(SCREENS.TARGET)}
         />
