@@ -17,8 +17,24 @@ npm run build    # production build into dist/
 npm run preview  # preview the production build
 ```
 
-Built with React + Vite, plain CSS, no backend, no images. State persists in
-`localStorage`. Designed for a handheld phone screen.
+Built with React + Vite, plain CSS, no backend. State persists in `localStorage`.
+Designed for a handheld phone screen.
+
+> Local note: `base` is the GitHub Pages sub-path, so locally the app is at
+> **http://localhost:5173/IAHO-field-scanner/** (not the bare root).
+
+## Install on the game device (PWA)
+
+The app is an installable PWA — install it once **while online** and it then launches
+fullscreen (no browser UI) and runs **fully offline** (no backend, everything cached).
+
+1. Open **https://thomashillebrink.github.io/IAHO-field-scanner/** in the phone's browser.
+2. **iOS / Safari:** Share → *Add to Home Screen*. **Android / Chrome:** ⋮ menu →
+   *Install app* / *Add to Home screen*.
+3. Launch it from the home-screen icon. Open it once more online so the service worker
+   finishes caching, then it works with the network off.
+
+Regenerate the icons with `npm run icons` (writes PNGs into `public/`).
 
 ## What's here
 
